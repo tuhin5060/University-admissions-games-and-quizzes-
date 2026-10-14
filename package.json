@@ -1,0 +1,8 @@
+{
+  "name": "campus-companion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bangla-first university admission companion with English practice",
+  "scripts": { "dev": "node scripts/serve.mjs", "check": "node --check assets/app.js && node --check assets/content.js && node --check assets/questions.js && node tests/check.mjs" },
+  "engines": { "node": ">=18" }
+}
