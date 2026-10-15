@@ -1,7 +1,7 @@
 /* CONTENT EDITOR: edit this file, commit to GitHub, Vercel redeploys.
    Do not publish deadlines, seat counts or student stories without an official source/consent. */
 window.CONTENT = {
-  updated: '2026-10-12', editor: 'SBS Students’ Association',
+  updated: '2026-10-16', editor: 'SBS Students’ Association',
   universities: [
     {id:'cu',short:'CU',name:'চট্টগ্রাম বিশ্ববিদ্যালয়',english:'University of Chittagong',place:'হাটহাজারী, চট্টগ্রাম',type:'সাধারণ বিশ্ববিদ্যালয়',url:'https://admission.cu.ac.bd/',site:'https://cu.ac.bd/',text:'চবিকে লক্ষ্য করলে প্রথমেই নিজের উপযোগী ইউনিট খুঁজে নাও। তারপর সেই ইউনিটের বিষয়ভিত্তিক প্রস্তুতি ও আগের প্রশ্ন মিলিয়ে পড়ার পরিকল্পনা করো।',steps:['বর্তমান circular থেকে নিজের ইউনিটের যোগ্যতা মিলাও।','ইউনিটের নম্বরবণ্টন অনুযায়ী বিষয়গুলো ভাগ করে পড়ো।','Admit card-এ দেওয়া কেন্দ্র ও যাতায়াতের পরিকল্পনা আগে ঠিক করো।']},
     {id:'du',short:'DU',name:'ঢাকা বিশ্ববিদ্যালয়',english:'University of Dhaka',place:'ঢাকা',type:'সাধারণ বিশ্ববিদ্যালয়',url:'https://admission.eis.du.ac.bd/',site:'https://du.ac.bd/',text:'ঢাবির প্রস্তুতি শুরু হোক ইউনিটের নির্দেশিকা থেকে। শুধু MCQ অনুশীলনেই থেমে থেকো না—তোমার ইউনিটে লিখিত অংশ থাকলে সেটির জন্যও নিয়মিত সময় রাখো।',steps:['তোমার ইউনিটের ভর্তি নির্দেশিকা সম্পূর্ণ পড়ো।','MCQ ও লিখিত অংশ প্রযোজ্য কি না circular থেকে দেখো।','বিষয় পছন্দ দেওয়ার আগে department ও নিজের আগ্রহ মিলাও।']},
