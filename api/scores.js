@@ -29,6 +29,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
       const rows = await attempts.aggregate([
+        { $match: { playerId: { $type: 'string' }, name: { $type: 'string' }, score: { $type: 'number' }, topic: { $type: 'string' } } },
         { $sort: { score: -1, correct: -1, timeSec: 1, at: 1 } },
         { $group: { _id: { playerId: '$playerId', topic: '$topic' }, best: { $first: '$ROOT' }, attempts: { $sum: 1 } } },
         { $replaceRoot: { newRoot: { $mergeObjects: ['$best', { attempts: '$attempts' }] } } },
