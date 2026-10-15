@@ -28,3 +28,8 @@
 .profile-welcome{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;margin:12px 0 0;padding:9px 13px;border:1px solid #86b99a;background:var(--white);border-radius:8px;color:var(--green);font-size:13px}.profile-welcome b{font-weight:800}
 
 .explanation-bn{margin-top:10px;padding:10px 12px;border-left:3px solid var(--green);background:var(--pale);border-radius:4px;font-family:inherit;line-height:1.75}
+
+
+/* Always-available home shortcut; keep clear of the mobile bottom navigation. */
+.floating-home{position:fixed;right:18px;bottom:22px;z-index:90;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--green);color:#fff;text-decoration:none;font-weight:800;box-shadow:0 5px 20px #0002}.floating-home span:first-child{font-size:22px;line-height:1}.floating-home:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+@media(max-width:680px){.floating-home{right:12px;bottom:calc(78px + env(safe-area-inset-bottom));min-height:44px;padding:9px 13px;font-size:13px}.mobile-nav{padding-bottom:env(safe-area-inset-bottom)}body{padding-bottom:env(safe-area-inset-bottom)}button,.btn,input,select{max-width:100%}}
