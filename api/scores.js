@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       const rows = await attempts.aggregate([
         { $sort: { score: -1, correct: -1, timeSec: 1, at: 1 } },
-        { $group: { _id: '$playerId', best: { $first: '$$ROOT' }, attempts: { $sum: 1 } } },
+        { $group: { _id: { playerId: '$playerId', topic: '$topic' }, best: { $first: '$ROOT' }, attempts: { $sum: 1 } } },
         { $replaceRoot: { newRoot: { $mergeObjects: ['$best', { attempts: '$attempts' }] } } },
         { $project: { _id: 0, playerId: 1, name: 1, avatar: 1, topic: 1, mode: 1, score: 1, correct: 1, total: 1, bestStreak: 1, timeSec: 1, at: 1, attempts: 1 } },
         { $sort: { score: -1, correct: -1, timeSec: 1 } },
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
         name: student.name,
         avatar: student.avatar || '🚂',
         topic: clean(body.topic, 50) || 'Mixed English',
-        mode: 'fun',
+        mode: ['fun', 'test'].includes(body.mode) ? body.mode : 'test',
         score: boundedInt(body.score, 0, totalValue * MAX_POINTS_PER_QUESTION),
         correct: correctValue,
         total: totalValue,
