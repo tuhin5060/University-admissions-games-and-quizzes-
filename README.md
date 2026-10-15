@@ -1,36 +1,38 @@
-# University Admissions Games & Quizzes
+# ক্যাম্পাস পথে — Admission Practice & Games
 
-A continuously updated English-practice and university-admission test project for Bangladeshi university applicants.
+A Bangla-first university admission companion restored from the project files shared in this chat.
 
-## Project direction
+## Restored content
 
-- **English topic practice:** grammar topics such as Noun & Determiner, Article, Number, Gender, Tense, Pronoun, and other admission-relevant topics.
-- **Previous-year question papers:** timed mock tests grouped by university and admission unit, prioritizing verified past questions from DU (Dhaka University) and CU (University of Chittagong).
-- **Exam mode:** full-paper simulation with timer, question navigation, answer review, score, and explanations where available.
-- **Practice mode:** smaller batches (for example, 10 questions) with immediate feedback and explanations.
-- **Leaderboard:** rank by score, with full-name display and optional roll number.
-- **Continuous question-bank updates:** add new source PDFs and question sets without duplicating existing questions. Preserve university, year, unit, topic, answer, explanation, and source metadata.
-- **No student account/password required** for the current product direction.
+- **273 English questions across 7 topics** — original question bank, answers, explanations, and source labels retained in `assets/questions.js`.
+- Practice mode: learning sessions, immediate explanations, batch sizes of 10/20/30, timed model tests, score review, resume, and local progress backup/import.
+- **Tense Express 🚂** — the original fun MCQ game with 20-question rounds, timer, streak bonuses, 50:50/time-freeze lifelines, confetti, sound, CSV export, and a shared leaderboard.
+- Eight university profiles, official admission resource links, checklist, campus profiles, light/dark theme, campus images, and search.
+- The separate **Previous Year Questions** archive and **Study Guides** sections are intentionally removed from site navigation and routing, as requested. Their practice-relevant question bank remains in the games; no questions were dropped.
 
-## Important current status
+## Vercel deployment
 
-The repository was empty when first inspected on 12 October 2026. This repository currently contains project documentation and an upgrade brief; the latest playable HTML file is attached in the ChatGPT conversation as `CU_Admission_English_Practice_Game_v2.html`. Add that file as `index.html` (or split it into app modules) when moving the game source into this repository.
+- Framework: Other / static site
+- Root directory: repository root
+- Build command: empty
+- Output directory: `.`
+- Package dependency: `@vercel/blob` for Tense Express score API (`api/scores.js`)
 
-The current HTML version uses browser local storage for progress. Cross-device score history and a shared leaderboard require a database-backed API; do not claim those features work until the database and API are configured and tested.
+Required Vercel environment variables:
 
-## Question quality rules
+- `BLOB_STORE_ID` — Blob store ID for the connected Vercel Blob store.
+- `BLOB_READ_WRITE_TOKEN` — Blob read/write token. Keep encrypted/sensitive in Vercel environment settings; never commit it or send it to client-side JavaScript.
 
-1. Prefer source-confirmed DU/CU previous-year questions.
-2. Do not label practice questions as previous-year questions.
-3. Reduce repetitive, very easy noun-classification items (proper/common/material/abstract noun).
-4. Prioritize applied questions on countability, determiners, noun forms, article usage, irregular plurals, and high-frequency exam patterns.
-5. Keep the answer key and explanations aligned with the source; flag uncertain scans instead of guessing.
-6. Deduplicate repeated questions while preserving distinct university/year/unit metadata.
+The API at `GET /api/scores` returns the shared game leaderboard. `POST /api/scores` saves one score as an individual JSON blob in `scores/`, so concurrent submissions do not overwrite one shared file. The question bank and Campus Companion progress do not require Blob; progress for that app remains browser-local. Tense Express leaderboard is shared online through Blob.
 
-## Suggested workflow
+## Question editing and checks
 
-1. Add the latest game HTML as `index.html`.
-2. Keep questions in a structured JSON file rather than mixing all content into UI code.
-3. Validate options and answer indexes whenever the question bank changes.
-4. Test practice mode, timed exam mode, result review, responsive layout, and persistence before deployment.
-5. Use a server-side API plus a database for shared results. Never put database service-role secrets in client-side code.
+Edit `assets/questions.js` to change the 273-question bank. `assets/app.js` contains the English practice and Campus Companion UI. `tense-express/index.html` contains the separate timed game. Do not delete or reword existing questions without a deliberate question-bank review.
+
+Run:
+
+```bash
+npm run check
+```
+
+This validates JavaScript syntax, all 273 MCQs, all topic routes, practice/test scoring, timeout submission, backup validation, theme behavior, and university content. It is not a substitute for checking the deployed URL on a real mobile browser.

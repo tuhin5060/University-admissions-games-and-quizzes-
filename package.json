@@ -1,8 +1,17 @@
 {
   "name": "campus-companion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "Bangla-first university admission companion with English practice",
-  "scripts": { "dev": "node scripts/serve.mjs", "check": "node --check assets/app.js && node --check assets/content.js && node --check assets/questions.js && node tests/check.mjs" },
-  "engines": { "node": ">=18" }
+  "type": "module",
+  "description": "Bangla-first university admission companion, English question games and Vercel Blob leaderboard",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node --check assets/app.js && node --check assets/content.js && node --check assets/questions.js && node --check api/scores.js && node tests/check.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }
