@@ -44,6 +44,7 @@ assert.ok(!fs.readFileSync('index.html','utf8').includes('href="#questions"'));
 assert.ok(!fs.readFileSync('index.html','utf8').includes('href="#guides"'));
 assert.ok(!fs.readFileSync('assets/app.js','utf8').includes('questions,practice'));
 assert.ok(run('practice()').includes('Model Test'));
+run("data.player={playerId:'11111111-1111-4111-8111-111111111111',name:'Returning Student',avatar:'🚂'}");assert.ok(run('home()').includes('Returning Student'));
 assert.ok(run("university('du')").includes('2026–27'));
 assert.ok(run("university('cu')").includes('২২ কিলোমিটার'));
 console.log('PASS: English labels, eight detailed campus/admission profiles, source URLs, removed archive/study-guide navigation.');

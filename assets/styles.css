@@ -24,3 +24,5 @@
 @media(prefers-reduced-motion:reduce){.fun-rain{display:none}.fun-timer.urgent{animation:none}}
 
 .student-profile-note{display:flex;align-items:center;gap:12px;margin:18px 0 10px;padding:14px 17px;border:1px solid var(--line);border-radius:9px;background:var(--white)}.student-profile-note.is-saved{border-color:#78b899;background:var(--pale)}.profile-status-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--deep);color:#fff;font-weight:800}.student-profile-note.is-saved .profile-status-icon{background:#178447}.student-profile-note>div{min-width:0}.student-profile-note b,.student-profile-note small{display:block}.student-profile-note small{font-size:12px;color:var(--muted);margin-top:2px}.student-profile-note+.toolbar{margin-top:0}
+
+.profile-welcome{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;margin:12px 0 0;padding:9px 13px;border:1px solid #86b99a;background:var(--white);border-radius:8px;color:var(--green);font-size:13px}.profile-welcome b{font-weight:800}
