@@ -1,77 +1,93 @@
-import { put, list, get } from '@vercel/blob';
+import { randomUUID } from 'node:crypto';
+import { getDatabase } from '../lib/mongodb.js';
 
-const TOTAL = 20;
-const MAX_SCORE = TOTAL * 40;
+const MAX_QUESTIONS = 30;
+const MAX_POINTS_PER_QUESTION = 40;
+const ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-function clean(v, max) {
-  return String(v ?? '').replace(/[<>]/g, '').trim().slice(0, max);
+function clean(value, max) {
+  return String(value ?? '').replace(/[<>\u0000-\u001f]/g, '').trim().slice(0, max);
 }
-
-async function readAll() {
-  const blobs = [];
-  let cursor;
-  do {
-    const r = await list({ prefix: 'scores/', cursor, limit: 1000 });
-    blobs.push(...r.blobs);
-    cursor = r.hasMore ? r.cursor : undefined;
-  } while (cursor);
-
-  const rows = await Promise.all(
-    blobs.map(async b => {
-      try {
-        // This store is private: use the SDK read path, never a public Blob URL.
-        const result = await get(b.pathname, { access: 'private' });
-        if (!result || result.statusCode !== 200 || !result.stream) return null;
-        const raw = await new Response(result.stream).text();
-        return JSON.parse(raw);
-      } catch {
-        return null;
-      }
-    })
-  );
-  return rows.filter(Boolean);
+function boundedInt(value, min, max) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return min;
+  return Math.min(max, Math.max(min, Math.floor(n)));
+}
+function parseBody(req) {
+  if (req.body && typeof req.body === 'object') return req.body;
+  if (typeof req.body === 'string' && req.body) return JSON.parse(req.body);
+  return {};
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Cache-Control', 'private, no-store');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
 
   try {
+    const db = await getDatabase();
+    const attempts = db.collection('scoreAttempts');
+
     if (req.method === 'GET') {
-      const rows = await readAll();
-      return res.status(200).json({ ok: true, rows });
+      const rows = await attempts.aggregate([
+        { $sort: { score: -1, correct: -1, timeSec: 1, at: 1 } },
+        { $group: { _id: '$playerId', best: { $first: '$$ROOT' }, attempts: { $sum: 1 } } },
+        { $replaceRoot: { newRoot: { $mergeObjects: ['$best', { attempts: '$attempts' }] } } },
+        { $project: { _id: 0, playerId: 1, name: 1, avatar: 1, topic: 1, mode: 1, score: 1, correct: 1, total: 1, bestStreak: 1, timeSec: 1, at: 1, attempts: 1 } },
+        { $sort: { score: -1, correct: -1, timeSec: 1 } },
+        { $limit: 100 }
+      ]).toArray();
+      return res.status(200).json({ ok: true, database: 'mongodb', rows });
     }
 
     if (req.method === 'POST') {
-      const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
-      const name = clean(b.name, 40);
-      const roll = clean(b.roll, 20);
-      if (name.length < 2 || !roll) {
-        return res.status(400).json({ ok: false, error: 'Name and roll are required.' });
+      const body = parseBody(req);
+      const playerId = String(body.playerId || '');
+      if (!ID_RE.test(playerId)) {
+        return res.status(400).json({ ok: false, error: 'Register a student name before submitting a score.' });
       }
-      const num = (v, lo, hi) => Math.min(hi, Math.max(lo, Number(v) || 0));
+      const student = await db.collection('students').findOne({ _id: playerId });
+      if (!student) return res.status(401).json({ ok: false, error: 'Student profile not found. Please save your name and try again.' });
+
+      const totalValue = Number(body.total);
+      if (!Number.isInteger(totalValue) || totalValue < 1 || totalValue > MAX_QUESTIONS) {
+        return res.status(400).json({ ok: false, error: `Question total must be between 1 and ${MAX_QUESTIONS}.` });
+      }
+      const correctValue = Number(body.correct);
+      if (!Number.isInteger(correctValue) || correctValue < 0 || correctValue > totalValue) {
+        return res.status(400).json({ ok: false, error: 'Invalid correct-answer count.' });
+      }
+
+      const attemptId = clean(body.attemptId, 100) || randomUUID();
+      const existing = await attempts.findOne({ attemptId });
+      if (existing) {
+        if (existing.playerId !== playerId) return res.status(409).json({ ok: false, error: 'This submission ID has already been used.' });
+        const { _id, ...entry } = existing;
+        return res.status(200).json({ ok: true, duplicate: true, entry });
+      }
+
       const entry = {
-        name,
-        roll,
-        avatar: clean(b.avatar, 8) || '🚂',
-        score: num(b.score, 0, MAX_SCORE),
-        correct: num(b.correct, 0, TOTAL),
-        total: TOTAL,
-        bestStreak: num(b.bestStreak, 0, TOTAL),
-        timeSec: num(b.timeSec, 0, 36000),
+        attemptId,
+        playerId,
+        name: student.name,
+        avatar: student.avatar || '🚂',
+        topic: clean(body.topic, 50) || 'Mixed English',
+        mode: 'fun',
+        score: boundedInt(body.score, 0, totalValue * MAX_POINTS_PER_QUESTION),
+        correct: correctValue,
+        total: totalValue,
+        bestStreak: boundedInt(body.bestStreak, 0, totalValue),
+        timeSec: boundedInt(body.timeSec, 0, 36000),
         at: new Date().toISOString()
       };
-      const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-      await put(`scores/${id}.json`, JSON.stringify(entry), {
-        access: 'private',
-        contentType: 'application/json',
-        addRandomSuffix: false
-      });
-      return res.status(200).json({ ok: true, entry });
+      await attempts.insertOne(entry);
+      await db.collection('students').updateOne({ _id: playerId }, { $set: { lastSeenAt: new Date() } });
+      return res.status(201).json({ ok: true, database: 'mongodb', entry });
     }
 
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
-  } catch (err) {
-    return res.status(500).json({ ok: false, error: String(err && err.message || err) });
+  } catch (error) {
+    console.error('leaderboard API failed', error?.name || 'DatabaseError');
+    return res.status(500).json({ ok: false, error: 'Could not read or save the leaderboard right now.' });
   }
 }
