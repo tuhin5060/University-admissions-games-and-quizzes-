@@ -129,7 +129,20 @@ Q('Article','____ apple you ate was rotten.',['An','A','The','No article'],2,'Th
 Q('Article','Once upon a time, there was ____ king.',['the','a','an','that'],1,'The story introduces an unspecified king, so use the indefinite article “a”.','HSTU C Unit 2013–14'),
 Q('Article','My father went to London by ____ air.',['the','no article','a','an'],1,'The fixed expression “by air” takes no article.','Practice bank'),
 Q('Article','I get up before ____ sunrise.',['a','an','the','at'],2,'“The sunrise” is the conventional expression in this sentence.','Practice bank'),
-Q('Article','They are in ____ prison for theft.',['no article','an','a','the'],0,'When referring to imprisonment as an institution/state, “in prison” takes no article.','Practice bank')
+Q('Article','They are in ____ prison for theft.',['no article','an','a','the'],0,'When referring to imprisonment as an institution/state, “in prison” takes no article.','Practice bank'),
+Q('Article','Which sentence contains appropriate article?',['He speaks the English like English.','He speaks English like English.','He speaks English like the English.','He speaks the English like the English.'],2,'Language names such as English normally take no article; “the English” refers to English people as a group.','JU B Unit 2025–26'),
+Q('Article','____ song is very passionately sung by ____ singer.',['the / the','a / a','a / the','the / a'],0,'Following the supplied CoU key, both noun phrases are treated as specific: “the song” and “the singer”.','CoU B Unit 2025–26'),
+Q('Article','Do not use ____ plates as ____ ashtrays.',['the / no article','no article / the','the / the','no article / no article'],0,'“The plates” refers to particular plates; “ashtrays” is a generic plural noun and takes no article.','RU A Unit 2022–23'),
+Q('Article','____ man on ____ upper floor is French.',['The / the','A / the','The / an','No article / no article'],0,'The location phrase identifies the man, and “the upper floor” refers to a specific floor. The natural preposition is “on”.','RU A Unit 2022–23'),
+Q('Article','She passed ____ test.',['the','a','an','no article'],0,'The supplied key assumes a particular test is being discussed, so it uses “the test”. Without context, “a test” can also be grammatical.','RU A Unit 2021–22'),
+Q('Article','You are ____ Nazrul, I see.',['a','an','the','no article'],0,'“A Nazrul” means someone comparable to Nazrul in talent or character.','RU A Unit 2020–21'),
+Q('Article','____ Mr. Robert whom you met the other day is my relative.',['The','A','An','No article'],0,'The defining clause identifies a particular Mr. Robert, so “the” is used. “The other day” is more idiomatic than “last day”.','JU H Unit 2019–20'),
+Q('Article','This is ____ better of ____ two.',['a / the','the / a','the / the','no article / the'],2,'Use “the better” when choosing one of two, and “the two” for the definite pair.','RU E Unit 2018–19'),
+Q('Article','____ Mahabharata is ____ greatest epic in world literature.',['The / the','A / the','The / a','No article / the'],0,'The epic is conventionally called “the Mahabharata”; a superlative such as “greatest” normally takes “the”.','JKKNIU 2018–19'),
+Q('Article','____ Miles is a popular band in Bangladesh.',['a','an','the','no article'],3,'Cross-check note: the supplied key says “the”, but the band name is normally used as “Miles” without an article. This item may vary by answer key.','RU K Unit 2017–18'),
+Q('Article','The only sport we enjoy is ____ hockey.',['the','a','no article','an'],2,'Names of sports generally take no article when used to name the sport: “hockey”.','KU B Unit 2016–17'),
+Q('Article','He went to ____ and ____.',['Canada / USA','Canada / the USA','the Canada / the USA','the Canada / USA'],1,'“Canada” normally takes no article, while “the USA” takes “the”.','JUST A Unit 2015–16'),
+Q('Article','He saw ____ most wonderful sight.',['a','an','the','no article'],2,'“Most wonderful” is a superlative phrase here, so use “the most wonderful sight”.','IU C Unit 2013–14')
 ],
 'Number':[
 Q('Number','The plural form of “sheep” is ____.',['shepies','sheep','sheeps','sheepes'],1,'“Sheep” has the same singular and plural form.','DU F Unit 2024–25'),
