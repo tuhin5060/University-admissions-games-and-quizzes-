@@ -54,3 +54,11 @@ The primary database is MongoDB Atlas. Add `MONGODB_URI` as a **Sensitive** Verc
 ## Analytics and dependencies
 
 The project uses `@vercel/analytics` for the static-site analytics script and `@vercel/functions` to manage the MongoDB pool in Vercel's runtime. Enable Web Analytics for this project in the Vercel dashboard to view visitor data. Local browser history remains local; registered profiles and Fun Challenge scores are database-backed.
+
+## Recent UX updates
+
+- The home page starts with a simple English MCQ test setup: name, topic, and question count.
+- Submitting a test shows the answer key, explanation, Bengali summary, and elapsed time.
+- Scores are ranked within each topic; the home leaderboard highlights the highest score and most frequent tester.
+- The preparation checklist was replaced with practical daily revision and previous-question tips.
+- Chittagong University and Dhaka University profiles include historical context and session-labelled unit information with official source links.
