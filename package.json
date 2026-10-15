@@ -6,7 +6,7 @@
   "description": "Bangla-first university admission companion with embedded game MCQs, MongoDB student profiles and leaderboard, Vercel Analytics",
   "scripts": {
     "dev": "node scripts/serve.mjs",
-    "check": "node --check assets/app.js && node --check assets/content.js && node --check assets/questions.js && node --check lib/mongodb.js && node --check api/profile.js && node --check api/scores.js && node tests/check.mjs"
+    "check": "node --check assets/app.js && node --check assets/content.js && node --check assets/questions.js && node --check lib/mongodb.js && node --check api/profile.js && node --check api/scores.js && node tests/smoke.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
