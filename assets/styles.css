@@ -33,3 +33,75 @@
 /* Always-available home shortcut; keep clear of the mobile bottom navigation. */
 .floating-home{position:fixed;right:18px;bottom:22px;z-index:90;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--green);color:#fff;text-decoration:none;font-weight:800;box-shadow:0 5px 20px #0002}.floating-home span:first-child{font-size:22px;line-height:1}.floating-home:focus-visible{outline:3px solid var(--text);outline-offset:3px}
 @media(max-width:680px){.floating-home{right:12px;bottom:calc(78px + env(safe-area-inset-bottom));min-height:44px;padding:9px 13px;font-size:13px}.mobile-nav{padding-bottom:env(safe-area-inset-bottom)}body{padding-bottom:env(safe-area-inset-bottom)}button,.btn,input,select{max-width:100%}}
+
+
+/* Campus Pothe — visual polish + phone-first usability */
+:root{--green:#176247;--deep:#103e2d;--ink:#202a24;--muted:#68766d;--paper:#f7f9f6;--cream:#edf4ed;--line:#dce6dd;--white:#fff;--orange:#bd6037;--pale:#e8f2e9}
+html{scroll-padding-top:92px}
+body{letter-spacing:.005em;-webkit-font-smoothing:antialiased}
+.header{box-shadow:0 3px 18px rgba(20,55,36,.045);backdrop-filter:saturate(140%) blur(12px)}
+.header-inner{min-height:78px}
+.brand{letter-spacing:-.02em}
+.brand-symbol{box-shadow:0 5px 14px rgba(23,98,71,.18)}
+.desktop-nav a,.mobile-nav a{transition:color .18s ease,background .18s ease}
+.desktop-nav a:hover{color:var(--green)}
+.hero{background:radial-gradient(ellipse at 90% 0%,rgba(194,220,194,.48),transparent 42%),linear-gradient(135deg,#f2f7ef 0%,#f8f8f0 70%);border-bottom-color:#e2ebe1}
+.hero .container,.container{width:100%}
+.eyebrow{letter-spacing:1.25px}
+.card,.study-card,.toolbar,.question,.path{box-shadow:0 3px 14px rgba(28,62,39,.035);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.card:hover{box-shadow:0 9px 24px rgba(28,62,39,.075);transform:translateY(-2px)}
+.btn{border-radius:10px;box-shadow:0 3px 8px rgba(16,62,45,.08);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn.secondary{box-shadow:none}
+input,select{min-height:46px;border-radius:9px}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(23,98,71,.1);outline:none}
+.toolbar,.question{border-radius:14px}
+.card{border-radius:14px}
+.notice{border-radius:0 10px 10px 0}
+.page-head{padding-top:30px}
+.page-head h1{letter-spacing:-.035em}
+.mobile-nav{box-shadow:0 -5px 24px rgba(22,47,31,.08);border-top:1px solid var(--line);backdrop-filter:blur(16px);background:rgba(255,255,255,.96)}
+.mobile-nav a{min-height:54px}
+.mobile-nav a[aria-current="page"]{color:var(--green);font-weight:800}
+.floating-home{background:linear-gradient(135deg,#1b7655,#14573e);border:1px solid rgba(255,255,255,.4);box-shadow:0 8px 24px rgba(17,75,49,.26);transition:transform .18s ease,box-shadow .18s ease}
+.floating-home:hover{transform:translateY(-2px);box-shadow:0 11px 28px rgba(17,75,49,.32)}
+footer{border-top:1px solid var(--line)}
+::selection{background:#cce5d1;color:#173c2a}
+@media(max-width:760px){
+ .header-inner{padding:12px 16px;min-height:68px;gap:12px}
+ .brand{font-size:18px;gap:9px}
+ .brand-symbol{width:39px;height:39px;font-size:24px;border-radius:11px}
+ .brand small{font-size:8px;letter-spacing:1.1px;margin-top:4px}
+ .desktop-nav{gap:10px;font-size:12px}
+ .container{padding-left:17px;padding-right:17px}
+ .hero{padding:32px 0 30px}
+ .hero h1{font-size:clamp(29px,8vw,40px);line-height:1.25}
+ .hero p{font-size:15px;margin:13px 0 20px}
+ .section{padding:28px 0}
+ .section-head{align-items:flex-start;flex-direction:column;gap:10px;margin-bottom:17px}
+ .grid{grid-template-columns:1fr;gap:13px}
+ .card{padding:18px;gap:10px}
+ .university-cover{width:calc(100% + 36px);margin:-18px -18px 5px;padding:22px 18px}
+ .page-head{padding:22px 0 18px}
+ .page-head h1{font-size:clamp(27px,7vw,35px)}
+ .toolbar{padding:14px;gap:12px}
+ .field{min-width:100%;flex-basis:100%}
+ .toolbar .btn,.actions .btn{min-height:48px}
+ .options{grid-template-columns:1fr}
+ .question{padding:16px;margin-bottom:12px}
+ .question h3{font-size:17px;line-height:1.7}
+ .option{padding:12px;min-height:50px}
+ .empty{padding:24px 16px}
+ .band{padding:21px;align-items:flex-start;flex-direction:column}
+ .paths{grid-template-columns:1fr 1fr}
+ footer .footer-inner{padding-left:17px;padding-right:17px;gap:20px}
+ .floating-home{right:12px;bottom:calc(76px + env(safe-area-inset-bottom));min-height:46px;padding:10px 14px}
+}
+@media(max-width:390px){
+ .desktop-nav{gap:8px;font-size:11px}
+ .brand{font-size:16px}
+ .brand small{letter-spacing:.7px}
+ .paths{grid-template-columns:1fr}
+ .container{padding-left:14px;padding-right:14px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.btn,.floating-home{transition:none}.card:hover,.floating-home:hover{transform:none}}
