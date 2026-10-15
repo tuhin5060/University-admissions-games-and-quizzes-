@@ -64,4 +64,4 @@ $('search-input').oninput=search;$('search-results').onclick=e=>{if(e.target.clo
 
 let themeState='light';
 function setTheme(t){themeState=t==='dark'?'dark':'light';document.documentElement.dataset.theme=themeState;const toggle=$('theme-toggle');if(toggle){toggle.textContent=themeState==='dark'?'Light Mode':'Dark Mode';toggle.setAttribute('aria-label',themeState==='dark'?'Switch to light mode':'Switch to dark mode');toggle.setAttribute('aria-pressed',String(themeState==='dark'))}try{localStorage.setItem('campus-theme',themeState)}catch{}}
-try{setTheme(localStorage.getItem('campus-theme')||'light')}catch{setTheme('light')}
+try{setTheme(localStorage.getItem('campus-theme')||'dark')}catch{setTheme('light')}
