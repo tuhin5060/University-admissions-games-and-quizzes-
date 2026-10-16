@@ -28,16 +28,27 @@ export default async function handler(req, res) {
     const attempts = db.collection('scoreAttempts');
 
     if (req.method === 'GET') {
-      const rows = await attempts.aggregate([
-        { $match: { playerId: { $type: 'string' }, name: { $type: 'string' }, score: { $type: 'number' }, topic: { $type: 'string' } } },
-        { $sort: { score: -1, correct: -1, timeSec: 1, at: 1 } },
-        { $group: { _id: { playerId: '$playerId', topic: '$topic' }, best: { $first: '$$ROOT' }, attempts: { $sum: 1 } } },
+      const match = { $match: { playerId: { $type: 'string' }, name: { $type: 'string' }, score: { $type: 'number' }, topic: { $type: 'string' } } };
+      const bestFirst = { $sort: { score: -1, correct: -1, timeSec: 1, at: 1 } };
+      const topicRows = await attempts.aggregate([
+        match,
+        bestFirst,
+        { $group: { _id: { playerId: '$playerId', topic: '$topic' }, best: { $first: '$ROOT' }, attempts: { $sum: 1 } } },
+        { $replaceRoot: { newRoot: { $mergeObjects: ['$best', { attempts: '$attempts' }] } } },
+        { $project: { _id: 0, playerId: 1, name: 1, avatar: 1, topic: 1, mode: 1, score: 1, correct: 1, total: 1, bestStreak: 1, timeSec: 1, at: 1, attempts: 1 } },
+        { $sort: { score: -1, correct: -1, timeSec: 1 } },
+        { $limit: 500 }
+      ]).toArray();
+      const globalRows = await attempts.aggregate([
+        match,
+        bestFirst,
+        { $group: { _id: '$playerId', best: { $first: '$ROOT' }, attempts: { $sum: 1 } } },
         { $replaceRoot: { newRoot: { $mergeObjects: ['$best', { attempts: '$attempts' }] } } },
         { $project: { _id: 0, playerId: 1, name: 1, avatar: 1, topic: 1, mode: 1, score: 1, correct: 1, total: 1, bestStreak: 1, timeSec: 1, at: 1, attempts: 1 } },
         { $sort: { score: -1, correct: -1, timeSec: 1 } },
         { $limit: 100 }
       ]).toArray();
-      return res.status(200).json({ ok: true, database: 'mongodb', rows });
+      return res.status(200).json({ ok: true, database: 'mongodb', rows: topicRows, globalRows });
     }
 
     if (req.method === 'POST') {
