@@ -244,3 +244,67 @@ footer a{color:#9de9b5}
  .session-tips-link .btn{margin-left:46px}
  .mobile-nav{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+
+/* Accessibility contrast repair: readable text on every dark surface */
+html:not([data-theme="light"]) body,
+html:not([data-theme="light"]) main,
+html:not([data-theme="light"]) section,
+html:not([data-theme="light"]) article,
+html:not([data-theme="light"]) .card,
+html:not([data-theme="light"]) .hero,
+html:not([data-theme="light"]) .section {
+  color: #f0f7f2;
+}
+html:not([data-theme="light"]) p,
+html:not([data-theme="light"]) li,
+html:not([data-theme="light"]) label,
+html:not([data-theme="light"]) .muted,
+html:not([data-theme="light"]) small,
+html:not([data-theme="light"]) .section-head p,
+html:not([data-theme="light"]) .card p,
+html:not([data-theme="light"]) .hero p {
+  color: #d0ded4 !important;
+  opacity: 1 !important;
+}
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) strong,
+html:not([data-theme="light"]) b {
+  color: #f5fff7;
+  opacity: 1;
+}
+html:not([data-theme="light"]) a:not(.btn):not(.button) { color: #a6f2bd; }
+html:not([data-theme="light"]) .btn,
+html:not([data-theme="light"]) .button,
+html:not([data-theme="light"]) button {
+  color: #f1fff5;
+  opacity: 1;
+}
+html:not([data-theme="light"]) .btn:not(.secondary),
+html:not([data-theme="light"]) .button:not(.secondary) {
+  background: #55d995;
+  border-color: #70e6a9;
+  color: #062b18 !important;
+  font-weight: 800;
+}
+html:not([data-theme="light"]) .btn.secondary,
+html:not([data-theme="light"]) .button.secondary {
+  background: #1b2b20;
+  color: #b8f7ca !important;
+  border-color: #45664f;
+}
+html:not([data-theme="light"]) .eyebrow,
+html:not([data-theme="light"]) .tag { color: #aaf4c0; opacity: 1; }
+html:not([data-theme="light"]) input,
+html:not([data-theme="light"]) select,
+html:not([data-theme="light"]) textarea {
+  color: #f1fff5;
+  background: #111b14;
+}
+html:not([data-theme="light"]) input::placeholder,
+html:not([data-theme="light"]) textarea::placeholder { color: #b8c9bd; opacity: 1; }
+html:not([data-theme="light"]) .notice,
+html:not([data-theme="light"]) .empty { color: #eaf8ee; }
