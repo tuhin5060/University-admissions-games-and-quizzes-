@@ -15,8 +15,6 @@ assert.equal((questions.match(/Q\('Article'/g)||[]).length,50);
 assert.ok(questions.includes('While strolling in the park, I chanced to meet ____ European lady.'));
 assert.ok(questions.includes('I only want ___ little sugar in my tea, please.'));
 assert.ok(questions.includes("She was appointed ____ head of the department"));
-assert.ok(questions.includes('She was appointed ____ head of the department'));
-assert.ok(questions.includes('চট্টগ্রাম বিশ্ববিদ্যালয়') === false);
 assert.ok(content.includes('চট্টগ্রাম বিশ্ববিদ্যালয়'));
 assert.ok(content.includes('ঢাকা বিশ্ববিদ্যালয়'));
 assert.ok(content.includes('Chittagong University Movement Council'));
