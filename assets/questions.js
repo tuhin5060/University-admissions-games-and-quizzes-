@@ -89,7 +89,7 @@ Q('Noun','What is the noun form of “laugh”?',['laughing','laughable','laught
 Q('Noun','“There has been a sharp rise in prices.” The word “rise” is a ____.',['object','verb','noun','determiner'],2,'In “a sharp rise”, the article “a” and adjective “sharp” precede “rise”, which functions as a noun.','RU A Unit 2022–23'),
 Q('Noun','A large ____ of money was spent on the project.',['number','amount','many','few'],1,'Use “amount” with uncountable nouns such as money.','Practice bank · revised countability set')
 ],
-'Article':[
+'Article Basics':[
 Q('Article','Where is ____ source of ____ Nile?',['the / the','a / a','a / the','the / a'],0,'The Nile is a specific river, and “the source” is a definite part of it.','DU C Unit 2022–23'),
 Q('Article','He is playing ____ flute.',['a','no article','an','the'],3,'Musical instruments are commonly preceded by “the” after “play”.','DU A Unit 2020–21'),
 Q('Article','____ love is such ____ beautiful thing.',['no article / a','a / no article','the / a','a / the'],0,'“Love” is used in a general abstract sense without an article; “a beautiful thing” is a singular count noun phrase.','DU B Unit 2017–18'),
