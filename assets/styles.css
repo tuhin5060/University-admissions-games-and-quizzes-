@@ -308,3 +308,9 @@ html:not([data-theme="light"]) input::placeholder,
 html:not([data-theme="light"]) textarea::placeholder { color: #b8c9bd; opacity: 1; }
 html:not([data-theme="light"]) .notice,
 html:not([data-theme="light"]) .empty { color: #eaf8ee; }
+
+/* Shared website visit counter */
+.visitor-counter{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:1000;display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line,#3f5047);border-radius:999px;background:rgba(13,22,17,.94);color:#eff8f1;box-shadow:0 8px 30px rgba(0,0,0,.22);font-size:.82rem;backdrop-filter:blur(12px)}
+.visitor-counter strong{font-variant-numeric:tabular-nums;font-size:.95rem;color:#b9f2c6}
+.visitor-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#68e58b;box-shadow:0 0 0 4px rgba(104,229,139,.13)}
+@media(max-width:480px){.visitor-counter{right:10px;bottom:max(10px,env(safe-area-inset-bottom));padding:8px 11px;font-size:.77rem}}
