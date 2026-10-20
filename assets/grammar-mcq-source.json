@@ -8,8 +8,8 @@
     "Subjunctive Verb": 30
   },
   "duplicateUploadsIgnored": true,
-  "attributionNotice": "Exam attribution is copied from the supplied study material and was not independently verified against official papers. Where the source gives no exam attribution, none has been invented.",
-  "topics": {
+  "attributionPolicy": "University/exam/session attribution is copied from supplied material only and has not been independently verified against official papers. Where the source does not state an exam, none is invented.",
+  "questions": {
     "Adverb": [
       {
         "code": "ADV-001",
