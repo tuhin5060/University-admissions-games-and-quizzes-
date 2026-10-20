@@ -27,6 +27,7 @@ assert.ok(questions.includes('She was appointed ____ head of the department'));
 assert.ok(content.includes('চট্টগ্রাম বিশ্ববিদ্যালয়'));
 assert.ok(content.includes('ঢাকা বিশ্ববিদ্যালয়'));
 assert.ok(scores.includes('const globalRows = await attempts.aggregate(['));
+assert.equal((scores.match(/\$\$ROOT/g)||[]).length,2, 'Leaderboard aggregation must preserve full MongoDB documents');
 assert.ok(scores.includes("_id: { playerId: '$playerId', topic: '$topic' }"));
 assert.ok(scores.includes("_id: '$playerId'"));
 assert.ok(scores.includes('globalRows }'));
