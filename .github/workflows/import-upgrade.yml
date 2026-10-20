@@ -24,7 +24,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
 
       - name: Unpack supplied source archive
         shell: bash
@@ -49,8 +48,10 @@ jobs:
           fi
 
       - name: Install and test the supplied version
-        working-directory: ${{ runner.temp }}/university-v2/University-Admissions-Games-Quizzes
+        shell: bash
         run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/university-v2/University-Admissions-Games-Quizzes"
           npm ci --no-audit --no-fund
           npm run check
 
