@@ -62,6 +62,31 @@
   <nav class="mobile-nav" aria-label="মোবাইল বিভাগ"><a href="#home"><span aria-hidden="true">⌂</span>Home</a><a href="#practice"><span aria-hidden="true">✓</span>English Test</a><a href="#tips"><span aria-hidden="true">📘</span>Tips</a><a href="#universities"><span aria-hidden="true">▥</span>Universities</a></nav>
   <dialog id="search-dialog"><form method="dialog" class="search-top"><label for="search-input">কী জানতে চাও?</label><button class="icon-button" aria-label="বন্ধ করুন">✕</button></form><input id="search-input" type="search" placeholder="ঢাবি, Article, পরীক্ষার দিন…" autocomplete="off"><div id="search-results" aria-live="polite"></div></dialog>
   <a class="floating-home" href="#home" aria-label="মূল পৃষ্ঠায় ফিরে যাও"><span aria-hidden="true">⌂</span><span>মূল পৃষ্ঠা</span></a>
+
+  <aside class="visitor-counter" id="visitor-counter" aria-live="polite" aria-label="মোট ওয়েবসাইট ভিজিট">
+    <span class="visitor-dot" aria-hidden="true"></span>
+    <span>মোট ভিজিট</span>
+    <strong id="visitor-count">লোড হচ্ছে…</strong>
+  </aside>
+  <script>
+    (function () {
+      var el = document.getElementById('visitor-count');
+      if (!el) return;
+      var counted = false;
+      try { counted = sessionStorage.getItem('campus-visit-counted') === '1'; } catch (_) {}
+      var url = counted ? '/api/visitors?count=0' : '/api/visitors';
+      fetch(url, { method: counted ? 'GET' : 'POST', headers: {'Content-Type':'application/json'}, body: counted ? undefined : '{}', cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.ok) {
+            el.textContent = Number(data.visitors).toLocaleString('bn-BD');
+            if (!counted) { try { sessionStorage.setItem('campus-visit-counted', '1'); } catch (_) {} }
+          } else el.textContent = '—';
+        })
+        .catch(function () { el.textContent = '—'; });
+    }());
+  </script>
+
   <div id="toast" role="status" aria-live="polite"></div>
   <noscript><p class="notice">এই website-এর practice ও navigation ব্যবহার করতে JavaScript চালু করুন। Official links: <a href="https://admission.cu.ac.bd/">চবি</a> · <a href="https://admission.eis.du.ac.bd/">ঢাবি</a></p></noscript>
 </body></html>
