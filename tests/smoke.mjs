@@ -7,6 +7,7 @@ const content=fs.readFileSync('assets/content.js','utf8');
 const questions=fs.readFileSync('assets/questions.js','utf8');
 const scores=fs.readFileSync('api/scores.js','utf8');
 const profile=fs.readFileSync('api/profile.js','utf8');
+const visitors=fs.readFileSync('api/visitors.js','utf8');
 
 assert.ok(html.includes('assets/content.js'));
 assert.ok(html.includes('assets/questions.js'));
@@ -16,6 +17,16 @@ assert.ok(app.includes('data-start="test"'));
 assert.ok(app.includes('function startSession('));
 assert.ok(app.includes('function render('));
 assert.ok(app.includes('সহজ বাংলায়:'));
+assert.ok(app.includes('q.bnExplanation'));
+assert.ok(html.includes('id="visitor-count"'));
+assert.ok(visitors.includes("collection('site_visits')"));
+assert.ok(visitors.includes('findOneAndUpdate'));
+assert.equal((questions.match(/"code":"ADV-\d{3}"/g)||[]).length,60);
+assert.equal((questions.match(/"code":"MOD-\d{3}"/g)||[]).length,30);
+assert.equal((questions.match(/"code":"CAU-\d{3}"/g)||[]).length,30);
+assert.equal((questions.match(/"code":"SUB-\d{3}"/g)||[]).length,30);
+assert.ok(questions.includes('বাংলা ব্যাখ্যা'));
+
 assert.ok(app.includes('এই topic-এ তোমার অবস্থান'));
 assert.ok(app.includes('payload.globalRows||payload.rows||[]'));
 assert.ok(!questions.includes('Master Bank PDF'));
@@ -38,4 +49,6 @@ new Function(content);
 new Function(questions);
 new Function(scores.replace(/^import .*?;\s*/gm,'').replace('export default async function handler','async function handler'));
 new Function(profile.replace(/^import .*?;\s*/gm,'').replace('export default async function handler','async function handler'));
-console.log('PASS: app, content, question bank and API syntax; homepage script wiring; 103 Article questions across both banks; university article additions; MongoDB API source checks.');
+new Function(visitors.replace(/^import .*?;\s*/gm,'').replace('export default async function handler','async function handler'));
+
+console.log('PASS: app/content/questions/API syntax; 150 grammar imports (60 Adverb, 30 Modal, 30 Causative, 30 Subjunctive); Bengali explanations; visitor-counter endpoint/UI; Article questions; university resources; MongoDB API checks.');
